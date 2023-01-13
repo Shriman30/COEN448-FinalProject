@@ -5,8 +5,6 @@ public class Main {
     public static void main(String[] args) {
         // Need to refactor such that we take user command inputs.
         Robot robot = new Robot();
-        robot.printFloor();
-        System.out.println(" ");
         /*
             Prompt the user to enter the command;
             if the command is D: then
@@ -60,6 +58,5 @@ public class Main {
         }
 
         /// Todo: Make sure the user can never provide an input that would make the robot step out of the floor
-        /*TODO: The isPenFacing and isFacing variables are not being updated. Need to check that*/
     }
 }
