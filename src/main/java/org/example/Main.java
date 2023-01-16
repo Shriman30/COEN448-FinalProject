@@ -3,28 +3,28 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        // Need to refactor such that we take user command inputs.
         Robot robot = new Robot();
-        /*
-            Prompt the user to enter the command;
-            if the command is D: then
-        */
         while(true){
             Scanner scanner = new Scanner (System.in);
             System.out.println("Please Enter Command:");
             String commands = scanner.nextLine();
             String [] commandParameters = commands.split(" ");
 
-
             // if commandParameters length is 1, then make sure that it is a string
             if(commandParameters.length == 1){
                 if(!robot.isInputParameterNumeric(commandParameters[0])){
                     // if the command is up or down set the pen position accordingly
+                    /*TODO: We can maybe try to remove the if checks and simply do robot.setPen(commandParameters[0]),
+                       since the check for up or down is being done inside setPen() already.
+                    */
                     if(commandParameters[0].equals("U") || commandParameters[0].equals("u") ||
                             commandParameters[0].equals("D") || commandParameters[0].equals("d")){
                         robot.setPen(commandParameters[0]);
                     }
                     // if the command is left or right, then rotate the robot accordingly
+                    /*TODO: We can maybe try to remove the if checks and simply do robot.setFacingDirection(commandParameters[0]),
+                       since the check for R and L are being done inside setPen() already.
+                    */
                     else if(commandParameters[0].equals("R") || commandParameters[0].equals("r") ||
                             commandParameters[0].equals("L") || commandParameters[0].equals("l")){
                         robot.setFacingDirection(commandParameters[0]);
