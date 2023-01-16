@@ -3,8 +3,9 @@ package org.example;
 import java.util.Scanner;
 
 public class Robot {
-    private char [][] floor ;
-    private int rows, cols = 0;
+    // private char [][] floor ;
+    // private int rows, cols = 0;
+    private Floor floor;
     private Boolean isPenDown = false;
     private String isPenFacing;
     private int x_position, y_position, y_printPosition =0;    // x and y position of the robot
@@ -15,6 +16,8 @@ public class Robot {
         x_position =0;
         y_position =0;
         int size = 0;
+
+        this.floor = new Floor(size,size);
 
         Scanner scanner = new Scanner (System.in);
         System.out.println("Please Enter Command:");
@@ -43,21 +46,27 @@ public class Robot {
 
     // Method used to initialize the floor according to the given requirements: called in the constructor
     public void initializeEnvironment(int size){
-        this.rows = size;
-        this.cols = size;
-        this.floor = new char[rows][cols];
+        // Initialize floor
+        // this.rows = size;
+        // this.cols = size;
+        // this.floor = new char[rows][cols];
 
-        for(int i=0;i<this.rows; i++){
-            for (int j=0;j<this.cols; j++){
-                floor[i][j] = '0';
-            }
-        };
+        // for(int i=0;i<this.rows; i++){
+        //     for (int j=0;j<this.cols; j++){
+        //         floor[i][j] = '0';
+        //     }
+        // };
+        this.floor.initializeFloor(size);
+
         this.isPenFacing = "Up";
         this.isFacing = "NORTH";
 
-        y_position = rows-1;
+        y_position = size-1;
         y_printPosition = 0;
-        floor[y_position][x_position] = '^';
+
+        // Set initial floor position
+        // floor[y_position][x_position] = '^';
+        this.floor.drawOnFloor(x_position, y_position, '^');
     }
 
     // SETTERS
@@ -98,7 +107,8 @@ public class Robot {
 //            floor[y_position][x_position] = '^';
         }
         if(isFacing.equals("SOUTH")) {
-            floor[y_position][x_position] = 'v';
+            // floor[y_position][x_position] = 'v';
+            this.floor.drawOnFloor(x_position, y_position, 'v');
             for (int i=0;i<steps;i++){
                 drawOnFloor(x_position,y_position);
                 y_position++;
@@ -136,7 +146,8 @@ public class Robot {
     // Method used to draw at the current position if the pen is down
     public void drawOnFloor(int x_position, int y_position){
         if(isPenFacing.equals("Down")){
-            floor[y_position][x_position] = '1';
+            this.floor.drawOnFloor(x_position, y_position, '1');
+            // floor[y_position][x_position] = '1';
         }
     }
 
@@ -145,20 +156,9 @@ public class Robot {
         System.out.println("Position:" + x_position + ", " + y_printPosition + " --" + "Pen: "+isPenFacing+ " --" + "Facing: "+ isFacing +" ");
     }
 
-    // Method used to show the user the floor traversed by the robot
+    // // Method used to show the user the floor traversed by the robot
     public void printFloor(){
-        // printing of the floor
-        for (int i=0;i< rows;i++){
-            System.out.print("|");
-            for (int j=0; j<cols;j++){
-                // replacing all ones with *
-                if(floor[i][j] == '1'){floor[i][j] = '*';}
-                if(floor[i][j] =='0'){floor[i][j] = ' ';}
-                // printing the floor
-                System.out.print( floor[i][j]+"|");
-                if(j == cols-1) System.out.println(" ");
-            }
-        }
+        this.floor.printFloor();
     }
 
 }
