@@ -104,7 +104,7 @@ public class Robot {
                 y_position--;
             }
             y_printPosition += steps;
-//            floor[y_position][x_position] = '^';
+            drawOnFloor(x_position,y_position);
         }
         if(isFacing.equals("SOUTH")) {
             // floor[y_position][x_position] = 'v';
@@ -114,22 +114,21 @@ public class Robot {
                 y_position++;
             }
             y_printPosition -= steps;
-//            floor[y_position][x_position] = 'v';
+            drawOnFloor(x_position,y_position);
         }
         if(isFacing.equals("EAST")) {
-//            floor[y_position][x_position] = '>';
             for (int i=0;i<steps;i++){
                 drawOnFloor(x_position,y_position);
                 x_position++;
             }
-//            floor[y_position][x_position] = '>';
+            drawOnFloor(x_position,y_position);
         }
         if(isFacing.equals("WEST")) {
             for (int i=0;i<steps;i++){
                 drawOnFloor(x_position,y_position);
                 x_position --;
             }
-//            floor[y_position][x_position] = '<';
+            drawOnFloor(x_position,y_position);
         }
     }
 
