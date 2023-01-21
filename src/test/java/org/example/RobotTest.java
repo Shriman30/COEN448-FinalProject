@@ -30,6 +30,13 @@ class RobotTest {
         assertEquals(robo.getXposition(), 0);
         // y coordinate should b N - 1, so 3 - 1 = 2
         assertEquals(robo.getYposition(), 2);
+
+        // Moving robot down 1
+        robo.setIsFacing("SOUTH");
+        robo.moveRobotForward(1);
+        assertEquals(robo.getXposition(), 0);
+        assertEquals(robo.getYposition(), 1);
+
     }
 
     @org.junit.jupiter.api.Test
