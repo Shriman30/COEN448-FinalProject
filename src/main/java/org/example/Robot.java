@@ -34,22 +34,11 @@ public class Robot {
 
     // Method used to initialize the floor according to the given requirements: called in the constructor
     public void initializeEnvironment(int size){
-        // Initialize floor
-        // this.rows = size;
-        // this.cols = size;
-        // this.floor = new char[rows][cols];
-
-        // for(int i=0;i<this.rows; i++){
-        //     for (int j=0;j<this.cols; j++){
-        //         floor[i][j] = '0';
-        //     }
-        // };
-        // this.floor.initializeFloor(size);
-
         this.isPenFacing = "Up";
         this.isFacing = "NORTH";
 
         y_position = size-1;
+        y_position = 0; // Temporary until requirements are rechecked
         y_printPosition = 0;
 
         // Set initial floor position
