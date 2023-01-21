@@ -2,11 +2,11 @@ package org.example;
 
 public class Floor {
     private char [][] floor;
-    private int rows, cols = 0;
+    private int size, rows, cols = 0;
 
-    public Floor(int rows,int cols){
-        this.rows = rows;
-        this.cols = cols;
+    public Floor(){
+        // this.rows = rows;
+        // this.cols = cols;
     }
 
     public void drawOnFloor(int x_position, int y_position, char val){
@@ -14,9 +14,9 @@ public class Floor {
     }
 
     // Method used to initialize the floor according to the given requirements: called in the constructor
-    public void initializeFloor(int size){
-        this.rows = size;
-        this.cols = size;
+    public void initializeFloor(){
+        this.rows = this.size;
+        this.cols = this.size;
         this.floor = new char[rows][cols];
 
         for(int i=0;i<this.rows; i++){
@@ -40,5 +40,33 @@ public class Floor {
                     if(j == cols-1) System.out.println(" ");
                 }
             }
+        }
+
+        public void setFloor(String commands) {
+            // Initial input commands to set floor
+            String[] commandParameters = commands.split(" ");
+            if (commandParameters.length == 2) {
+                if (commandParameters[0].equals("I") || commandParameters[0].equals("i")) {
+                    if (isInputParameterNumeric(commandParameters[1])) {
+                        this.size = Integer.parseInt(commandParameters[1]);
+                    }
+                }
+            }
+        }
+
+        // Method used to validate whether an input parameter is numeric or alphabetic
+        public boolean isInputParameterNumeric(String val) {
+            if (val == null)
+                return false;
+            try {
+                int i = Integer.parseInt(val);
+                return true;
+            } catch (NumberFormatException number) {
+                return false;
+            }
+        }
+
+        public int getSize(){
+            return this.size;
         }
 }
