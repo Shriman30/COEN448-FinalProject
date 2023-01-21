@@ -70,7 +70,7 @@ public class Robot {
     }
 
     // SETTERS
-    private void setIsFacing(String isFacing){
+    public void setIsFacing(String isFacing){
         this.isFacing = isFacing;
     }
     private void setIsPenFacing(String isPenFacing){
@@ -158,6 +158,16 @@ public class Robot {
     // // Method used to show the user the floor traversed by the robot
     public void printFloor(){
         this.floor.printFloor();
+    }
+
+    // returns the x position of the robot
+    public int getXposition(){
+        return this.x_position;
+    }
+
+    // returns the y position of the robot
+    public int getYposition(){
+        return this.y_position;
     }
 
 }
