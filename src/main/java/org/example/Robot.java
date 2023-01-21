@@ -12,25 +12,13 @@ public class Robot {
     private String isFacing;     // Orientation of the robot (N,E,W,S)
 
     //Constructor: Initialize the robot with the grid and the direction, and position [x,y] = [0,0]
-    public Robot(String commands){
+    public Robot(Floor fl){
         x_position =0;
         y_position =0;
-        int size = 0;
-        
-        this.floor = new Floor(size,size);
-
-        // Scanner scanner = new Scanner (System.in);
-        // System.out.println("Please Enter Command:");
-        // String commands = scanner.nextLine();
-        String [] commandParameters = commands.split(" ");
-        if(commandParameters.length == 2){
-            if(commandParameters[0].equals("I") || commandParameters[0].equals("i")){
-                if(isInputParameterNumeric(commandParameters[1])){
-                    size = Integer.parseInt(commandParameters[1]);
-                }
-            }
-        }
-        initializeEnvironment(size);
+        this.floor = fl;
+        // Sets floor to proper size and all 0
+        this.floor.initializeFloor();
+        initializeEnvironment(floor.getSize());
     }
 
     // Method used to validate whether an input parameter is numeric or alphabetic
@@ -56,7 +44,7 @@ public class Robot {
         //         floor[i][j] = '0';
         //     }
         // };
-        this.floor.initializeFloor(size);
+        // this.floor.initializeFloor(size);
 
         this.isPenFacing = "Up";
         this.isFacing = "NORTH";

@@ -3,10 +3,15 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
+        // Getting user input for initial floor size
         Scanner scanner = new Scanner (System.in);
-        System.out.println("Please Enter Command:");
+        System.out.println("Please Enter Command to initialize floor:");
         String commands = scanner.nextLine();
-        Robot robot = new Robot(commands);
+        Floor floor = new Floor();
+        // Setting floor size
+        floor.setFloor(commands);
+        // Passing floor to this robot to use
+        Robot robot = new Robot(floor);
         while(true){
             // Scanner scanner = new Scanner (System.in);
             // TODO : Was this duplicated in constructor for robot? @shriman
@@ -62,5 +67,6 @@ public class Main {
         }
 
         /// Todo: Make sure the user can never provide an input that would make the robot step out of the floor
+        scanner.close();
     }
 }
