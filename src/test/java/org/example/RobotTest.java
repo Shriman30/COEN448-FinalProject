@@ -28,7 +28,8 @@ class RobotTest {
         // Dont move robot any steps so should maintain initial position of (0,0)
         robo.moveRobotForward(0);
         assertEquals(robo.getXposition(), 0);
-        assertEquals(robo.getYposition(), 0);
+        // y coordinate should b N - 1, so 3 - 1 = 2
+        assertEquals(robo.getYposition(), 2);
     }
 
     @org.junit.jupiter.api.Test
