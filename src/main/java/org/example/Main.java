@@ -3,11 +3,15 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        Robot robot = new Robot();
+        Scanner scanner = new Scanner (System.in);
+        System.out.println("Please Enter Command:");
+        String commands = scanner.nextLine();
+        Robot robot = new Robot(commands);
         while(true){
-            Scanner scanner = new Scanner (System.in);
+            // Scanner scanner = new Scanner (System.in);
+            // TODO : Was this duplicated in constructor for robot? @shriman
             System.out.println("Please Enter Command:");
-            String commands = scanner.nextLine();
+            commands = scanner.nextLine();
             String [] commandParameters = commands.split(" ");
 
             // if commandParameters length is 1, then make sure that it is a string

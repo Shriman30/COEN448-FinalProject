@@ -21,7 +21,7 @@ class RobotTest {
     @org.junit.jupiter.api.Test
     void moveRobotForward() {
         // TODO : add way of implement input for robot to continue
-        Robot robo = new Robot();
+        Robot robo = new Robot("I 3");
         robo.setIsFacing("NORTH");
 
 
