@@ -69,4 +69,12 @@ public class Floor {
         public int getSize(){
             return this.size;
         }
+
+        public int getColumns(){
+            return this.cols;
+        }
+
+        public int getRows(){
+            return this.rows;
+        }
 }

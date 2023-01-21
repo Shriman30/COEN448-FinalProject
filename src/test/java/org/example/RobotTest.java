@@ -2,6 +2,8 @@ package org.example;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.Test;
+
 
 class RobotTest {
 
@@ -20,8 +22,9 @@ class RobotTest {
 
     @org.junit.jupiter.api.Test
     void moveRobotForward() {
-        // TODO : add way of implement input for robot to continue
-        Robot robo = new Robot("I 3");
+        Floor floor = new Floor();
+        floor.setFloor("I 3");
+        Robot robo = new Robot(floor);
         robo.setIsFacing("NORTH");
 
 
@@ -37,6 +40,48 @@ class RobotTest {
         assertEquals(robo.getXposition(), 0);
         assertEquals(robo.getYposition(), 1);
 
+    }
+
+    @org.junit.jupiter.api.Test
+    void robotTraverseEntireFloorWithSizeN(){
+        int N = 3;
+        Floor floor = new Floor();
+        String command = "I 3";
+        floor.setFloor(command);
+        Robot robo = new Robot(floor);
+
+        // Robot set to traverse entire floor from bottom left corner to top right
+        int size = floor.getSize() - 1;
+        for (int i = 0; i < floor.getRows(); i++) {
+            for (int j = 0; j < floor.getColumns(); j++) {
+                if (j < size && i%2==0) {
+                    robo.setIsFacing("EAST");
+                    robo.moveRobotForward(1);
+                    assertEquals(robo.getXposition(), j + 1);
+                    assertEquals(robo.getYposition(), i);
+                }
+                if (j == size && i != size) {
+                    robo.setIsFacing("NORTH");
+                    robo.moveRobotForward(1);
+                    assertEquals(robo.getXposition(), j);
+                    assertEquals(robo.getYposition(), i + 1);
+                }
+                if(j>0 && i%2 != 0){
+                    robo.setIsFacing("WEST");
+                    robo.moveRobotForward(1);
+                    assertEquals(robo.getXposition(), j - 1);
+                    assertEquals(robo.getYposition(), i);
+                }
+                if(j==0 && i%2 != 0 && i != size){
+                    robo.setIsFacing("NORTH");
+                    robo.moveRobotForward(1);
+                    assertEquals(robo.getXposition(), j);
+                    assertEquals(robo.getYposition(), i + 1);
+                }
+
+            }
+        }
+        
     }
 
     @org.junit.jupiter.api.Test
