@@ -38,12 +38,11 @@ public class Robot {
         this.isFacing = "NORTH";
 
         y_position = size-1;
-        y_position = 0; // Temporary until requirements are rechecked
+        // y_position = 0; // Temporary until requirements are rechecked
         y_printPosition = 0;
 
         // Set initial floor position
-        // floor[y_position][x_position] = '^';
-        this.floor.drawOnFloor(x_position, y_position, '^');
+        // this.floor.drawOnFloor(x_position, y_position, '^');
     }
 
     // SETTERS
