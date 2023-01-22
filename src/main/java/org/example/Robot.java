@@ -143,7 +143,7 @@ public class Robot {
 
     // returns the y position of the robot
     public int getYposition(){
-        return this.y_position;
+        return this.y_printPosition;
     }
 
 }
