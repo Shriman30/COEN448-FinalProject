@@ -15,6 +15,8 @@ public class Main {
         while(true){
             // Scanner scanner = new Scanner (System.in);
             // TODO : Was this duplicated in constructor for robot? @shriman
+            /* TODO: @Jason, this was found in the constructor because initially the robot was initializing the floor and all that stuff. Since the Floor is
+                     now in a Class of its own, we do not need to have the initialization in the robot constructor  */
             System.out.println("Please Enter Command:");
             commands = scanner.nextLine();
             String [] commandParameters = commands.split(" ");
