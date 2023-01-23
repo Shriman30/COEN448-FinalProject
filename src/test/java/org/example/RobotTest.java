@@ -52,6 +52,7 @@ class RobotTest {
 
         // Robot set to traverse entire floor from bottom left corner to top right
         int size = floor.getSize() - 1;
+        int old_pos = 0;
         for (int i = 0; i < floor.getRows(); i++) {
             for (int j = 0; j < floor.getColumns(); j++) {
                 if (j < size && i%2==0) {
@@ -65,20 +66,23 @@ class RobotTest {
                     robo.moveRobotForward(1);
                     assertEquals(robo.getXposition(), j);
                     assertEquals(robo.getYposition(), i + 1);
+                    old_pos = j;
                 }
-                if(j>0 && i%2 != 0){
+                // TODO : not working
+                if(robo.getXposition()>0 && i%2 != 0){
                     robo.setIsFacing("WEST");
                     robo.moveRobotForward(1);
-                    assertEquals(robo.getXposition(), j - 1);
+                    assertEquals(robo.getXposition(), j + old_pos - 1);
+                    old_pos--;
                     assertEquals(robo.getYposition(), i);
                 }
-                if(j==0 && i%2 != 0 && i != size){
+                if(j==0 && i%2 != 0 && i < size){
                     robo.setIsFacing("NORTH");
                     robo.moveRobotForward(1);
                     assertEquals(robo.getXposition(), j);
                     assertEquals(robo.getYposition(), i + 1);
                 }
-
+                
             }
         }
         

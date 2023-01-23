@@ -42,16 +42,18 @@ public class Floor {
             }
         }
 
-        public void setFloor(String commands) {
+        public boolean setFloor(String commands) {
             // Initial input commands to set floor
             String[] commandParameters = commands.split(" ");
             if (commandParameters.length == 2) {
                 if (commandParameters[0].equals("I") || commandParameters[0].equals("i")) {
                     if (isInputParameterNumeric(commandParameters[1])) {
-                        this.size = Integer.parseInt(commandParameters[1]);
+                        this.setSize(Integer.parseInt(commandParameters[1]));
+                        return true;
                     }
                 }
             }
+            return false;
         }
 
         // Method used to validate whether an input parameter is numeric or alphabetic
@@ -68,6 +70,10 @@ public class Floor {
 
         public int getSize(){
             return this.size;
+        }
+
+        public void setSize(int size){
+            this.size = size;
         }
 
         public int getColumns(){
