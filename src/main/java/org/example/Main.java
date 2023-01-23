@@ -42,7 +42,7 @@ public class Main {
                     }
                     // if the command is  C, then print the current status of the robot and its pen
                     else if(commandParameters[0].equals("C") || commandParameters[0].equals("c")){
-                        robot.printRobotStatus();
+                        System.out.println(robot.printRobotStatus());
                     }
                     // if the command is P, then display the floor
                     else if(commandParameters[0].equals("P") || commandParameters[0].equals("p")){

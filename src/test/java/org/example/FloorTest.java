@@ -8,6 +8,15 @@ class FloorTest {
 
     @Test
     void drawOnFloor() {
+        Floor floor = new Floor();
+        floor.setFloor("I 3");
+        floor.initializeFloor();
+        floor.drawOnFloor(1,1, '^');
+        assertEquals(floor.getFloorValue(1,1), '^');
+        assertNotEquals(floor.getFloorValue(1,1),' ');
+        assertNotEquals(floor.getFloorValue(1,1),'v');
+        assertNotEquals(floor.getFloorValue(1,1),'>');
+        assertNotEquals(floor.getFloorValue(1,1),'<');
     }
 
     @Test
