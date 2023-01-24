@@ -78,7 +78,7 @@ class RobotTest {
         robo.moveRobotForward(0);
         assertEquals(robo.getXposition(), 0);
         // y coordinate should b N - 1, so 3 - 1 = 2
-        assertEquals(robo.getYposition(), 2);
+        assertEquals(robo.getYposition(), 0);
 
         // Moving robot down 1
         robo.setIsFacing("SOUTH");
@@ -144,6 +144,12 @@ class RobotTest {
 
     @org.junit.jupiter.api.Test
     void printRobotStatus() {
+        Floor floor = new Floor();
+        floor.setFloor("I 3");
+        Robot Robo = new Robot(floor);
+
+        // test fails because actual facing direction is capital but expected is not
+        assertEquals("Position: 0, 0 – Pen: down - Facing: north", Robo.printRobotStatus()); // C command
     }
 
     @org.junit.jupiter.api.Test

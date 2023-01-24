@@ -83,4 +83,6 @@ public class Floor {
         public int getRows(){
             return this.rows;
         }
+
+        public char getFloorValue(int x, int y) {return this.floor[x][y];}
 }
