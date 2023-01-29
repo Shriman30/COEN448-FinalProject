@@ -27,7 +27,7 @@ public class Robot {
     public String getIsFacing(){
         return isFacing;
     }
-    // Method used to validate whether an input parameter is numeric or alphabetic
+    // Method used to validate whether an input parameter is numeric (and positive) or alphabetic
     public boolean isInputParameterNumeric(String val){
         if(val == null) return false;
         try{
