@@ -32,7 +32,11 @@ public class Robot {
         if(val == null) return false;
         try{
             int i = Integer.parseInt(val);
+            if (i>= 0){
             return true;
+            }else{
+                return false;
+            }
         }catch(NumberFormatException number){
             return false;
         }
@@ -54,7 +58,7 @@ public class Robot {
     public void setIsFacing(String isFacing){
         this.isFacing = isFacing;
     }
-    private void setIsPenFacing(String isPenFacing){
+    void setIsPenFacing(String isPenFacing){
         this.isPenFacing = isPenFacing;
     }
 
@@ -132,8 +136,8 @@ public class Robot {
     }
 
     // This method prints the current position of the pen, whether it is facing up/down and the direction (NEWS)
-    public void printRobotStatus(){
-        System.out.println("Position:" + x_position + ", " + y_printPosition + " --" + "Pen: "+isPenFacing+ " --" + "Facing: "+ isFacing +" ");
+    public String printRobotStatus(){
+        return ("Position:" + x_position + ", " + y_printPosition + " --" + "Pen: "+isPenFacing+ " --" + "Facing: "+ isFacing +" ");
     }
 
     // // Method used to show the user the floor traversed by the robot
