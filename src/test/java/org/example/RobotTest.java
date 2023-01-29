@@ -41,48 +41,86 @@ class RobotTest {
     }
 
     @org.junit.jupiter.api.Test
-    void setFacingDirection() {
+    void setFacingDirectionNorthToWest() {
         Floor fl = new Floor();
         Robot robot = new Robot(fl);
 
-        // If robot is facing NORTH
         robot.setIsFacing("NORTH");
         robot.setFacingDirection("L"); // turn left;
         assertEquals("WEST", robot.getIsFacing());
 
-        robot.setIsFacing("NORTH");
-        robot.setFacingDirection("R"); // turn right;
-        assertEquals("EAST", robot.getIsFacing());
-
-        // If robot is facing EAST
-        robot.setIsFacing("EAST");
-        robot.setFacingDirection("L"); // turn left;
-        assertEquals("NORTH", robot.getIsFacing());
-
-        robot.setIsFacing("EAST");
-        robot.setFacingDirection("R"); // turn right;
-        assertEquals("SOUTH", robot.getIsFacing());
-
-        // If robot is facing SOUTH
-        robot.setIsFacing("SOUTH");
-        robot.setFacingDirection("L"); // turn left;
-        assertEquals("EAST", robot.getIsFacing());
-
-        robot.setIsFacing("SOUTH");
-        robot.setFacingDirection("R"); // turn right;
-        assertEquals("WEST", robot.getIsFacing());
-
-        // If robot is facing WEST
-        robot.setIsFacing("WEST");
-        robot.setFacingDirection("L"); // turn left;
-        assertEquals("SOUTH", robot.getIsFacing());
-
-        robot.setIsFacing("WEST");
-        robot.setFacingDirection("R"); // turn right;
-        assertEquals("NORTH", robot.getIsFacing());
-
-        // TODO:Maybe have a test for invalid input later on.
     }
+    @org.junit.jupiter.api.Test
+    void setFacingDirectionNorthToEast() {
+        Floor fl = new Floor();
+        Robot robot = new Robot(fl);
+
+        robot.setIsFacing("NORTH");
+        robot.setFacingDirection("R"); // turn right;
+        assertEquals("EAST", robot.getIsFacing());
+
+    }
+    @org.junit.jupiter.api.Test
+    void setFacingDirectionEastToNorth() {
+        Floor fl = new Floor();
+        Robot robot = new Robot(fl);
+
+        robot.setIsFacing("EAST");
+        robot.setFacingDirection("L"); // turn left;
+        assertEquals("NORTH", robot.getIsFacing());
+
+    }
+    @org.junit.jupiter.api.Test
+    void setFacingDirectionEastToSouth() {
+        Floor fl = new Floor();
+        Robot robot = new Robot(fl);
+
+        robot.setIsFacing("EAST");
+        robot.setFacingDirection("R"); // turn right;
+        assertEquals("SOUTH", robot.getIsFacing());
+    }
+    @org.junit.jupiter.api.Test
+    void setFacingDirectionSouthToEast() {
+        Floor fl = new Floor();
+        Robot robot = new Robot(fl);
+
+        robot.setIsFacing("SOUTH");
+        robot.setFacingDirection("L"); // turn left;
+        assertEquals("EAST", robot.getIsFacing());
+
+    }
+    @org.junit.jupiter.api.Test
+    void setFacingDirectionSouthToWest() {
+        Floor fl = new Floor();
+        Robot robot = new Robot(fl);
+
+        robot.setIsFacing("SOUTH");
+        robot.setFacingDirection("R"); // turn right;
+        assertEquals("WEST", robot.getIsFacing());
+
+    }
+    @org.junit.jupiter.api.Test
+    void setFacingDirectionWestToSouth() {
+        Floor fl = new Floor();
+        Robot robot = new Robot(fl);
+
+        robot.setIsFacing("WEST");
+        robot.setFacingDirection("L"); // turn left;
+        assertEquals("SOUTH", robot.getIsFacing());
+
+    }
+
+    @org.junit.jupiter.api.Test
+    void setFacingDirectionWestToNorth() {
+        Floor fl = new Floor();
+        Robot robot = new Robot(fl);
+
+        robot.setIsFacing("WEST");
+        robot.setFacingDirection("R"); // turn right;
+        assertEquals("NORTH", robot.getIsFacing());
+
+    }
+
 
     @org.junit.jupiter.api.Test
     void moveRobotForward0Steps() {
