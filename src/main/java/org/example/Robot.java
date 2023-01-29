@@ -32,6 +32,9 @@ public class Robot {
         if(val == null) return false;
         try{
             int i = Integer.parseInt(val);
+            if (i < 0){
+                return false;
+            }
             return true;
         }catch(NumberFormatException number){
             return false;

@@ -16,12 +16,12 @@ class RobotTest {
         Robot robot = new Robot(fl);
         assertEquals(true, robot.isInputParameterNumeric("6"));
     }
-//    @org.junit.jupiter.api.Test
-//    void isInputParameterNegativeNumeric() {
-//        Floor fl = new Floor();
-//        Robot robot = new Robot(fl);
-//        assertFalse(robot.isInputParameterNumeric("-6"));
-//    }
+    @org.junit.jupiter.api.Test
+    void isInputParameterNegativeNumeric() {
+        Floor fl = new Floor();
+        Robot robot = new Robot(fl);
+        assertFalse(robot.isInputParameterNumeric("-5"));
+    }
     @org.junit.jupiter.api.Test
     void isInputParameterNonNumeric() {
         Floor fl = new Floor();
