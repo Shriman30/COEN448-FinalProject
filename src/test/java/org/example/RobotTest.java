@@ -1,6 +1,9 @@
 package org.example;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.Test;
 
@@ -8,7 +11,22 @@ import org.junit.Test;
 class RobotTest {
 
     @org.junit.jupiter.api.Test
-    void isInputParameterNumeric() {
+    void isInputParameterPositiveNumeric() {
+        Floor fl = new Floor();
+        Robot robot = new Robot(fl);
+        assertEquals(true, robot.isInputParameterNumeric("6"));
+    }
+    @org.junit.jupiter.api.Test
+    void isInputParameterNegativeNumeric() {
+        Floor fl = new Floor();
+        Robot robot = new Robot(fl);
+        assertFalse(robot.isInputParameterNumeric("-6"));
+    }
+    @org.junit.jupiter.api.Test
+    void isInputParameterNonNumeric() {
+        Floor fl = new Floor();
+        Robot robot = new Robot(fl);
+        assertFalse(robot.isInputParameterNumeric("N"));
     }
 
     @org.junit.jupiter.api.Test
@@ -135,9 +153,33 @@ class RobotTest {
     }
 
     @org.junit.jupiter.api.Test
-    void setPen() {
+    void setPenUp() {
+        Floor fl = new Floor();
+        Robot robot = new Robot(fl);        
+        robot.setPen("U");
+        assertEquals("Up",robot.getIsPenFacing());
     }
-
+    @org.junit.jupiter.api.Test
+    void setPenDown() {
+        Floor fl = new Floor();
+        Robot robot = new Robot(fl);        
+        robot.setPen("D");
+        assertEquals("Down",robot.getIsPenFacing());
+    }
+    @org.junit.jupiter.api.Test
+    void setPenNotUp() {
+        Floor fl = new Floor();
+        Robot robot = new Robot(fl);        
+        robot.setPen("U");
+        assertNotEquals("Down",robot.getIsPenFacing());
+    }
+    @org.junit.jupiter.api.Test
+    void setPenNotDown() {
+        Floor fl = new Floor();
+        Robot robot = new Robot(fl);        
+        robot.setPen("D");
+        assertNotEquals("Up",robot.getIsPenFacing());
+    }
     @org.junit.jupiter.api.Test
     void drawOnFloor() {
     }
@@ -154,5 +196,6 @@ class RobotTest {
 
     @org.junit.jupiter.api.Test
     void printFloor() {
+        
     }
 }
