@@ -21,6 +21,12 @@ public class Robot {
         initializeEnvironment(floor.getSize());
     }
 
+    public String getIsPenFacing(){
+        return isPenFacing;
+    }
+    public String getIsFacing(){
+        return isFacing;
+    }
     // Method used to validate whether an input parameter is numeric or alphabetic
     public boolean isInputParameterNumeric(String val){
         if(val == null) return false;
@@ -38,10 +44,9 @@ public class Robot {
         this.isFacing = "NORTH";
 
         y_position = size-1;
-        // y_position = 0; // Temporary until requirements are rechecked
         y_printPosition = 0;
 
-        // Set initial floor position
+        // Draw initial floor position
         // this.floor.drawOnFloor(x_position, y_position, '^');
     }
 
