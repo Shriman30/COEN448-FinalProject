@@ -46,8 +46,6 @@ class RobotTest {
         assertEquals(robo.getYposition(), 2);
     }
 
-
-
     @org.junit.jupiter.api.Test
     void setPen() {
     }
