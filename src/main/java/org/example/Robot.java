@@ -48,9 +48,6 @@ public class Robot {
 
         y_position = size-1;
         y_printPosition = 0;
-
-        // Draw initial floor position
-        // this.floor.drawOnFloor(x_position, y_position, '^');
     }
 
     // SETTERS
@@ -62,7 +59,6 @@ public class Robot {
     }
 
     // This method is used to set the direction the robot is facing, i.e., turn the robot (N,E,S,W)
-    /// TODO: Ask the prof if the robot moves towards left or right according to its relative position, or if it is relative to us( the programmer)
     public void setFacingDirection(String turnCommand){
         // check what the command is and then compare with the current position
         if(isFacing.equals("NORTH")) {
@@ -91,8 +87,7 @@ public class Robot {
             drawOnFloor(x_position,y_position);
         }
         if(isFacing.equals("SOUTH")) {
-            // floor[y_position][x_position] = 'v';
-            this.floor.drawOnFloor(x_position, y_position, 'v');
+//            this.floor.drawOnFloor(x_position, y_position, 'v');
             for (int i=0;i<steps;i++){
                 drawOnFloor(x_position,y_position);
                 y_position++;
@@ -130,7 +125,6 @@ public class Robot {
     public void drawOnFloor(int x_position, int y_position){
         if(isPenFacing.equals("Down")){
             this.floor.drawOnFloor(x_position, y_position, '1');
-            // floor[y_position][x_position] = '1';
         }
     }
 
