@@ -79,19 +79,28 @@ public class Robot {
     // Check function to see if robot is out of bounds
     public boolean isOutOfBounds(int x,int y,int table_size){
         if(x < 0 || y < 0 || x > table_size - 1 || y > table_size -1){
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
     // Method is used to move the robot forward by a specified number of steps.
     public void moveRobotForward(int steps){
+        int stepsActuallyMoved = 0; // Steps that were actually executed
+
         if(isFacing.equals("NORTH")) {
             for (int i=0;i<steps;i++){
                 drawOnFloor(x_position,y_position);
                 y_position--;
+                stepsActuallyMoved++;
+                if(isOutOfBounds(x_position,y_position,this.floor.getSize())){
+                    // went out of bounds, undoing what was done, then leaving for loop
+                    y_position++;
+                    stepsActuallyMoved--;
+                    break;
+                }
             }
-            y_printPosition += steps;
+            y_printPosition += stepsActuallyMoved;
             drawOnFloor(x_position,y_position);
         }
         if(isFacing.equals("SOUTH")) {
@@ -99,14 +108,26 @@ public class Robot {
             for (int i=0;i<steps;i++){
                 drawOnFloor(x_position,y_position);
                 y_position++;
+                stepsActuallyMoved++;
+                if(isOutOfBounds(x_position, y_position, this.floor.getSize())){
+                    y_position--;
+                    stepsActuallyMoved--;
+                    break;
+                }
             }
-            y_printPosition -= steps;
+            y_printPosition -= stepsActuallyMoved;
             drawOnFloor(x_position,y_position);
         }
         if(isFacing.equals("EAST")) {
             for (int i=0;i<steps;i++){
                 drawOnFloor(x_position,y_position);
                 x_position++;
+                stepsActuallyMoved++;
+                if(isOutOfBounds(x_position,y_position,this.floor.getSize())){
+                    x_position--;
+                    stepsActuallyMoved--;
+                    break;
+                }
             }
             drawOnFloor(x_position,y_position);
         }
@@ -114,6 +135,11 @@ public class Robot {
             for (int i=0;i<steps;i++){
                 drawOnFloor(x_position,y_position);
                 x_position --;
+                if(isOutOfBounds(x_position,y_position,this.floor.getSize())){
+                    x_position++;
+                    stepsActuallyMoved--;
+                    break;
+                }
             }
             drawOnFloor(x_position,y_position);
         }
