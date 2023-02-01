@@ -1,1 +1,3 @@
 target/test-classes/org/example/RobotTest.class
+
+*.class 

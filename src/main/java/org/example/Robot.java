@@ -76,6 +76,14 @@ public class Robot {
         }
     }
 
+    // Check function to see if robot is out of bounds
+    public boolean isOutOfBounds(int x,int y,int table_size){
+        if(x < 0 || y < 0 || x > table_size - 1 || y > table_size -1){
+            return false;
+        }
+        return true;
+    }
+
     // Method is used to move the robot forward by a specified number of steps.
     public void moveRobotForward(int steps){
         if(isFacing.equals("NORTH")) {
