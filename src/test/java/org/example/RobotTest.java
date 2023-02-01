@@ -126,14 +126,13 @@ class RobotTest {
     void moveRobotForward0Steps() {
         Floor floor = new Floor();
         floor.setFloor("I 3");
-        Robot robo = new Robot(floor);
-        robo.setIsFacing("NORTH");
+        Robot robot = new Robot(floor);
+        robot.setIsFacing("NORTH");
 
-
-        // Dont move robot any steps so should maintain initial position of (0,0)
-        robo.moveRobotForward(0);
-        assertEquals(robo.getXposition(), 0);
-        assertEquals(robo.getYposition(), 0);
+        // Don't move robot any steps so should maintain initial position of (0,0)
+        robot.moveRobotForward(0);
+        assertEquals(robot.getXposition(), 0);
+        assertEquals(robot.getYposition(), 0);
 
     }
 
@@ -141,11 +140,11 @@ class RobotTest {
     void moveRobotNorth2Steps(){
         Floor floor = new Floor();
         floor.setFloor("I 3");
-        Robot robo = new Robot(floor);
-        robo.setIsFacing("NORTH");
-        robo.moveRobotForward(2);
-        assertEquals(robo.getXposition(),0);
-        assertEquals(robo.getYposition(), 2);
+        Robot robot = new Robot(floor);
+        robot.setIsFacing("NORTH");
+        robot.moveRobotForward(2);
+        assertEquals(robot.getXposition(),0);
+        assertEquals(robot.getYposition(), 2);
     }
 
     @org.junit.jupiter.api.Test
@@ -184,10 +183,10 @@ class RobotTest {
     void printRobotStatus() {
         Floor floor = new Floor();
         floor.setFloor("I 3");
-        Robot Robo = new Robot(floor);
+        Robot Robot = new Robot(floor);
 
         // test fails because actual facing direction is capital but expected is not
-//        assertEquals("Position: 0, 0 – Pen: down - Facing: north", Robo.printRobotStatus()); // C command
+//        assertEquals("Position: 0, 0 – Pen: down - Facing: north", Robot.printRobotStatus()); // C command
     }
 
     @org.junit.jupiter.api.Test
