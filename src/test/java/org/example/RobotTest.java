@@ -183,10 +183,9 @@ class RobotTest {
     void printRobotStatus() {
         Floor floor = new Floor();
         floor.setFloor("I 3");
-        Robot Robot = new Robot(floor);
-
-        // test fails because actual facing direction is capital but expected is not
-//        assertEquals("Position: 0, 0 – Pen: down - Facing: north", Robot.printRobotStatus()); // C command
+        Robot Robo = new Robot(floor);
+        // Checking if print is correct with documentation
+       assertEquals("Position: 0, 0 - Pen: up - Facing: north", Robo.printRobotStatus());
     }
 
     @org.junit.jupiter.api.Test

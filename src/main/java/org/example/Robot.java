@@ -163,8 +163,8 @@ public class Robot {
     }
 
     // This method prints the current position of the pen, whether it is facing up/down and the direction (NEWS)
-    public void printRobotStatus(){
-        System.out.println("Position:" + x_position + ", " + y_printPosition + " --" + "Pen: "+isPenFacing+ " --" + "Facing: "+ isFacing +" ");
+    public String printRobotStatus(){
+        return ("Position: " + x_position + ", " + y_printPosition + " - " + "Pen: "+isPenFacing.toLowerCase()+ " - " + "Facing: "+ isFacing.toLowerCase());
     }
 
     // // Method used to show the user the floor traversed by the robot
