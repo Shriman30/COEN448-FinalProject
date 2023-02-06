@@ -11,6 +11,7 @@ import org.junit.Test;
 
 class RobotTest {
 
+    // R6
     @org.junit.jupiter.api.Test
     public void checkOutOfBounds(){
         int size = 100;
@@ -182,7 +183,7 @@ class RobotTest {
 
     }
 
-
+    // R4
     @org.junit.jupiter.api.Test
     void moveRobotForward0Steps() {
         Floor floor = new Floor();
@@ -197,6 +198,7 @@ class RobotTest {
 
     }
 
+    // R4
     @org.junit.jupiter.api.Test
     void moveRobotNorth2Steps(){
         Floor floor = new Floor();
@@ -222,6 +224,8 @@ class RobotTest {
         robot.setPen("D");
         assertEquals("Down",robot.getIsPenFacing());
     }
+
+    // R7
     @org.junit.jupiter.api.Test
     void setPenNotUp() {
         Floor fl = new Floor();
@@ -229,6 +233,8 @@ class RobotTest {
         robot.setPen("U");
         assertNotEquals("Down",robot.getIsPenFacing());
     }
+
+    // R7
     @org.junit.jupiter.api.Test
     void setPenNotDown() {
         Floor fl = new Floor();
@@ -254,4 +260,9 @@ class RobotTest {
 
     }
 
+
+    @org.junit.jupiter.api.Test
+    public void quitProgramTest(){
+        
+    }
 }
