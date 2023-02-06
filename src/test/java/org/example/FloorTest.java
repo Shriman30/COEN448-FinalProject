@@ -67,4 +67,41 @@ class FloorTest {
     @Test
     void printFloor() {
     }
+
+    // Check every position in matrix for its initialized value of '0'
+    // For Requirement R1
+    @org.junit.jupiter.api.Test
+    public void checkFloorForInitializedValues(){
+        int floorSize = 10;
+        for (int i = 1; i < floorSize; i++) {
+            Floor floor = new Floor();
+            // uses a 'user input'
+            floor.setFloor("I " + i);
+            floor.initializeFloor();
+            for (int j = 0; j < i; j++) {
+                for (int k = 0; k < i; k++) {
+                    assertEquals('0', floor.getFloorValue(k, j));
+                }
+            }
+            
+
+        }
+    }
+
+    // Test for R1, to check for NxN 
+    // Tests all the way till 100x100
+    @org.junit.jupiter.api.Test
+    public void floorSizeTest(){
+        int testSize = 100;
+        
+        for (int i = 1; i < testSize; i++) {
+            Floor floor = new Floor();
+            // uses a 'user input'
+            floor.setFloor("I " + i);
+            floor.initializeFloor();
+            assertEquals(i, floor.getRows());
+            assertEquals(i, floor.getColumns());
+            assertEquals(i, floor.getSize());
+        }
+    }
 }
