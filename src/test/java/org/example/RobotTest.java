@@ -8,7 +8,68 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.Test;
 
 
+
 class RobotTest {
+
+    @org.junit.jupiter.api.Test
+    public void checkOutOfBounds(){
+        int size = 100;
+        int stepsOutOfBounds = 10;
+        // Checking out of bounds for floors up to size 'size' going north
+        Floor fl = new Floor();
+        for (int i = 1; i < size; i++) {
+            fl.setSize(i);
+            // Checking out of bounds for a floor that is size i, and robot moves stepsOutOfBounds steps out of bounds
+            for (int j = 0; j < stepsOutOfBounds; j++) {
+                Robot robot = new Robot(fl);
+                robot.setIsFacing("NORTH");
+                robot.moveRobotForward(i+j);
+                // Robot should be at edge of floor when going out of bounds
+                assertEquals(fl.getSize() - 1,robot.getYposition());
+            }
+
+        }
+
+        for (int i = 1; i < size; i++) {
+            fl.setSize(i);
+            // Checking out of bounds for a floor that is size i, and robot moves stepsOutOfBounds steps out of bounds
+            for (int j = 0; j < stepsOutOfBounds; j++) {
+                Robot robot = new Robot(fl);
+                robot.setIsFacing("SOUTH");
+                robot.moveRobotForward(i+j);
+                // Robot should be at edge of floor when going out of bounds
+                assertEquals(0,robot.getYposition());
+            }
+
+        }
+
+        for (int i = 1; i < size; i++) {
+            fl.setSize(i);
+            // Checking out of bounds for a floor that is size i, and robot moves stepsOutOfBounds steps out of bounds
+            for (int j = 0; j < stepsOutOfBounds; j++) {
+                Robot robot = new Robot(fl);
+                robot.setIsFacing("EAST");
+                robot.moveRobotForward(i+j);
+                // Robot should be at edge of floor when going out of bounds
+                assertEquals(fl.getSize() - 1,robot.getXposition());
+            }
+
+        }
+
+        for (int i = 1; i < size; i++) {
+            fl.setSize(i);
+            // Checking out of bounds for a floor that is size i, and robot moves stepsOutOfBounds steps out of bounds
+            for (int j = 0; j < stepsOutOfBounds; j++) {
+                Robot robot = new Robot(fl);
+                robot.setIsFacing("WEST");
+                robot.moveRobotForward(i+j);
+                // Robot should be at edge of floor when going out of bounds
+                assertEquals(0,robot.getXposition());
+            }
+
+        }
+
+    }
 
     @org.junit.jupiter.api.Test
     void isInputParameterPositiveNumeric() {
