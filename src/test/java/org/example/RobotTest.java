@@ -253,4 +253,25 @@ class RobotTest {
     void printFloor() {
 
     }
+
+    // For Requirement 1
+    // R1: The floor must be represented as a two dimensional array that will be initialized to a size of NxN,
+    //  where N is any integer greater than 1 and each floor cell will be initialized to an alphanumeric 
+    //  character of ‘0’. 
+    // This initialization must be a user-defined input and must be of the format “i N’ or “I N”.
+
+    // Test for R1, to check for NxN 
+    @org.junit.jupiter.api.Test
+    public void floorSizeTest(){
+        int testSize = 100;
+        
+        for (int i = 1; i < testSize; i++) {
+            Floor floor = new Floor();
+            floor.setSize(i);
+            floor.initializeFloor();
+            assertEquals(i, floor.getRows());
+            assertEquals(i, floor.getColumns());
+            assertEquals(i, floor.getSize());
+        }
+    }
 }
