@@ -25,7 +25,6 @@ public class Floor {
             }
         }
     }
-
         // Method used to show the user the floor traversed by the robot
         public void printFloor(){
             // printing of the floor

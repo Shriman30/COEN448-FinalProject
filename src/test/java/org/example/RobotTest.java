@@ -103,6 +103,7 @@ class RobotTest {
         assertEquals("Up", robot.getIsPenFacing());
         assertEquals("NORTH", robot.getIsFacing());
         assertEquals(0, robot.getYposition());
+        assertEquals(0, robot.getXposition());
     }
 
     @org.junit.jupiter.api.Test
