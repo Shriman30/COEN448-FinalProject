@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import org.junit.Test;
 
 
@@ -255,14 +258,33 @@ class RobotTest {
        assertEquals("Position: 0, 0 - Pen: up - Facing: north", Robo.printRobotStatus());
     }
 
+    // R8 & R9
     @org.junit.jupiter.api.Test
     void printFloor() {
+        Floor floor = new Floor();
+        floor.setFloor("I 3");
+        Robot robo = new Robot(floor);
 
+        // For testing System.out.println() statements
+        PrintStream originalOut = System.out;
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
+        // moving the robot 1 north with pen down then face east, then printing
+        robo.setPen("D");
+        robo.moveRobotForward(1);
+        robo.setIsFacing("EAST");
+        robo.printFloor();
+    
+        // Removing white space and line breaks due to limitations of comparing strings
+        String out = outContent.toString().replaceAll("\\s", "");
+        String expected = "| | | | |*| | | |*| | | ".replaceAll("\\s", "");
+ 
+        assertEquals(expected, out);
+
+        // Setting print back to before
+        System.setOut(originalOut);
     }
 
 
-    @org.junit.jupiter.api.Test
-    public void quitProgramTest(){
-        
-    }
 }
