@@ -1,6 +1,3 @@
 target/test-classes/org/example/RobotTest.class
 
-*.class
-**/*.class
-target/test-classes/org/example/FloorTest.class
-target/test-classes/org/example/RobotTest.class
+*.class 
