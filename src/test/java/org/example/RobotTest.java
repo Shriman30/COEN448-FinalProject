@@ -250,6 +250,7 @@ class RobotTest {
     void drawOnFloor() {
     }
 
+    // R8
     @org.junit.jupiter.api.Test
     void printRobotStatus() {
         Floor floor = new Floor();
@@ -259,7 +260,7 @@ class RobotTest {
        assertEquals("Position: 0, 0 - Pen: up - Facing: north", Robo.printRobotStatus());
     }
 
-    // R8 & R9
+    // R9
     @org.junit.jupiter.api.Test
     void printFloor() {
         Floor floor = new Floor();
