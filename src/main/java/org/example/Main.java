@@ -53,7 +53,7 @@ public class Main {
             else System.out.println("Invalid command, please try again.");
         }
 
-        /// Todo: Make sure the user can never provide an input that would make the robot step out of the floor
+
         scanner.close();
     }
 }
