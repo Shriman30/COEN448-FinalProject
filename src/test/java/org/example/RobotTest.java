@@ -16,15 +16,14 @@ class RobotTest {
 
     // R6
     @org.junit.jupiter.api.Test
-    public void checkOutOfBoundsNorth(){
+    public void checkOutOfBounds(){
         int size = 100;
         int stepsOutOfBounds = 10;
         // Checking out of bounds for floors up to size 'size' going north
         Floor fl = new Floor();
         for (int i = 1; i < size; i++) {
             fl.setSize(i);
-            // Checking out of bounds for a floor that is size i, 
-            // and robot moves stepsOutOfBounds steps out of bounds
+            // Checking out of bounds for a floor that is size i, and robot moves stepsOutOfBounds steps out of bounds
             for (int j = 0; j < stepsOutOfBounds; j++) {
                 Robot robot = new Robot(fl);
                 robot.setIsFacing("NORTH");
@@ -34,18 +33,10 @@ class RobotTest {
             }
 
         }
-    }
-    // R6
-    @org.junit.jupiter.api.Test
-    public void checkOutOfBoundsSouth(){
-        // Checking out of bounds for floors up to size 'size' going south
-        int size = 100;
-        int stepsOutOfBounds = 10;
-        Floor fl = new Floor();
+
         for (int i = 1; i < size; i++) {
             fl.setSize(i);
-            // Checking out of bounds for a floor that is size i, 
-            // and robot moves stepsOutOfBounds steps out of bounds
+            // Checking out of bounds for a floor that is size i, and robot moves stepsOutOfBounds steps out of bounds
             for (int j = 0; j < stepsOutOfBounds; j++) {
                 Robot robot = new Robot(fl);
                 robot.setIsFacing("SOUTH");
@@ -55,19 +46,10 @@ class RobotTest {
             }
 
         }
-    }
-    // R6
-    @org.junit.jupiter.api.Test
-    public void checkOutOfBoundsEast(){
-        int size = 100;
-        int stepsOutOfBounds = 10;
-        // Checking out of bounds for floors up to size 'size' going east
-        Floor fl = new Floor();
 
         for (int i = 1; i < size; i++) {
             fl.setSize(i);
-            // Checking out of bounds for a floor that is size i, 
-            // and robot moves stepsOutOfBounds steps out of bounds
+            // Checking out of bounds for a floor that is size i, and robot moves stepsOutOfBounds steps out of bounds
             for (int j = 0; j < stepsOutOfBounds; j++) {
                 Robot robot = new Robot(fl);
                 robot.setIsFacing("EAST");
@@ -77,18 +59,10 @@ class RobotTest {
             }
 
         }
-    }
-    // R6
-    @org.junit.jupiter.api.Test
-    public void checkOutOfBoundsWest(){
-        int size = 100;
-        int stepsOutOfBounds = 10;
-        // Checking out of bounds for floors up to size 'size' going north
-        Floor fl = new Floor();
+
         for (int i = 1; i < size; i++) {
             fl.setSize(i);
-            // Checking out of bounds for a floor that is size i, 
-            // and robot moves stepsOutOfBounds steps out of bounds
+            // Checking out of bounds for a floor that is size i, and robot moves stepsOutOfBounds steps out of bounds
             for (int j = 0; j < stepsOutOfBounds; j++) {
                 Robot robot = new Robot(fl);
                 robot.setIsFacing("WEST");
@@ -120,7 +94,6 @@ class RobotTest {
         assertFalse(robot.isInputParameterNumeric("N"));
     }
 
-    // R2
     @org.junit.jupiter.api.Test
     void initializeEnvironment() {
         Floor fl = new Floor();
@@ -132,7 +105,6 @@ class RobotTest {
         assertEquals(0, robot.getYposition());
     }
 
-    // R3
     @org.junit.jupiter.api.Test
     void setFacingDirectionNorthToWest() {
         Floor fl = new Floor();
@@ -143,7 +115,6 @@ class RobotTest {
         assertEquals("WEST", robot.getIsFacing());
 
     }
-    // R3
     @org.junit.jupiter.api.Test
     void setFacingDirectionNorthToEast() {
         Floor fl = new Floor();
@@ -154,7 +125,6 @@ class RobotTest {
         assertEquals("EAST", robot.getIsFacing());
 
     }
-    // R3
     @org.junit.jupiter.api.Test
     void setFacingDirectionEastToNorth() {
         Floor fl = new Floor();
@@ -165,7 +135,6 @@ class RobotTest {
         assertEquals("NORTH", robot.getIsFacing());
 
     }
-    // R3
     @org.junit.jupiter.api.Test
     void setFacingDirectionEastToSouth() {
         Floor fl = new Floor();
@@ -175,7 +144,6 @@ class RobotTest {
         robot.setFacingDirection("R"); // turn right;
         assertEquals("SOUTH", robot.getIsFacing());
     }
-    // R3
     @org.junit.jupiter.api.Test
     void setFacingDirectionSouthToEast() {
         Floor fl = new Floor();
@@ -186,7 +154,6 @@ class RobotTest {
         assertEquals("EAST", robot.getIsFacing());
 
     }
-    // R3
     @org.junit.jupiter.api.Test
     void setFacingDirectionSouthToWest() {
         Floor fl = new Floor();
@@ -197,7 +164,6 @@ class RobotTest {
         assertEquals("WEST", robot.getIsFacing());
 
     }
-    //R3
     @org.junit.jupiter.api.Test
     void setFacingDirectionWestToSouth() {
         Floor fl = new Floor();
@@ -208,7 +174,7 @@ class RobotTest {
         assertEquals("SOUTH", robot.getIsFacing());
 
     }
-    // R3
+
     @org.junit.jupiter.api.Test
     void setFacingDirectionWestToNorth() {
         Floor fl = new Floor();
@@ -246,7 +212,7 @@ class RobotTest {
         assertEquals(robot.getXposition(),0);
         assertEquals(robot.getYposition(), 2);
     }
-    // R7
+
     @org.junit.jupiter.api.Test
     void setPenUp() {
         Floor fl = new Floor();
@@ -282,7 +248,7 @@ class RobotTest {
     @org.junit.jupiter.api.Test
     void drawOnFloor() {
     }
-    // R5 
+
     @org.junit.jupiter.api.Test
     void printRobotStatus() {
         Floor floor = new Floor();
