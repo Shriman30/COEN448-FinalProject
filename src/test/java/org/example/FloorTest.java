@@ -49,15 +49,18 @@ class FloorTest {
         assertFalse(floor.setFloor(command));
     }
 
+    @Test
+    void isFloorSquare(int n) {
+        Floor floor = new Floor();
+        floor.setSize(n);
+        floor.initializeFloor();
+        // Check if floor is Square
+        assertEquals(floor.getRows(), floor.getColumns());
+    }
 
-    @Test 
-    void isFloorSquare100(){
+    @Test void isFloorSquare100(){
         for (int i = 0; i < 100; i++) {
-            Floor floor = new Floor();
-            floor.setSize(i);
-            floor.initializeFloor();
-            // Check if floor is Square
-            assertEquals(floor.getRows(), floor.getColumns());
+            isFloorSquare(i);
         }
     }
 
