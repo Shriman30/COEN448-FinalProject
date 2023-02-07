@@ -13,10 +13,29 @@ class FloorTest {
         floor.initializeFloor();
         floor.drawOnFloor(1,1, '^');
         assertEquals(floor.getFloorValue(1,1), '^');
-        assertNotEquals(floor.getFloorValue(1,1),' ');
-        assertNotEquals(floor.getFloorValue(1,1),'v');
-        assertNotEquals(floor.getFloorValue(1,1),'>');
-        assertNotEquals(floor.getFloorValue(1,1),'<');
+
+        Robot robot = new Robot(floor);
+        robot.setPen("D");
+        robot.setIsFacing("NORTH");
+        robot.moveRobotForward(2);
+        floor.printFloor();
+
+        assertEquals( '*', floor.getFloorValue(0,0), '1');
+        assertEquals( '*', floor.getFloorValue(0,1), '1');
+    }
+
+    @Test
+    void notdrawOnFloor(){
+        Floor floor = new Floor();
+        floor.setFloor("I 3");
+        floor.initializeFloor();
+        Robot robot = new Robot(floor);
+        robot.setIsFacing("NORTH");
+        robot.moveRobotForward(2);
+        floor.printFloor();
+        assertEquals( ' ', floor.getFloorValue(0,0), '0');
+        assertEquals( ' ', floor.getFloorValue(0,1), '0');
+
     }
 
     @Test
