@@ -32,7 +32,6 @@ class FloorTest {
         floor.initializeFloor();
 
         Robot robot = new Robot(floor);
-        robot.setPen("D");
 
         robot.setPen("D");
         robot.setIsFacing("NORTH");
