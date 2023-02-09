@@ -25,6 +25,28 @@ class FloorTest {
     }
 
     @Test
+    void drawOnFloor100(){
+        // testing for floor size 100
+        Floor floor = new Floor();
+        floor.setFloor("I 100");
+        floor.initializeFloor();
+
+        Robot robot = new Robot(floor);
+
+        robot.setPen("D");
+        robot.setIsFacing("NORTH");
+        robot.moveRobotForward(99);
+        robot.setIsFacing("EAST");
+        robot.moveRobotForward(99);
+        robot.setIsFacing("SOUTH");
+        robot.moveRobotForward(99);
+        floor.printFloor();
+
+        assertEquals( '*', floor.getFloorValue(0,0), '1');
+        assertEquals( '*', floor.getFloorValue(0,1), '1');
+    }
+
+    @Test
     void notdrawOnFloor(){
         Floor floor = new Floor();
         floor.setFloor("I 3");
