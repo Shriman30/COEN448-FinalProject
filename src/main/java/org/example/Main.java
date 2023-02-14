@@ -7,6 +7,12 @@ public class Main {
         Scanner scanner = new Scanner (System.in);
         System.out.println("Please Enter Command to initialize floor:");
         String commands = scanner.nextLine();
+        if(commands.length() < 3){
+            System.out.println("The command that you entered is not a valid initialization command. Please restart and try again!");
+            scanner.close();
+            return;
+        }
+        commands = cleanInputString(commands);
         Floor floor = new Floor();
         // Setting floor size
         floor.setFloor(commands);
@@ -15,6 +21,7 @@ public class Main {
         while(true){
             System.out.println("Please Enter Command:");
             commands = scanner.nextLine();
+            commands = cleanInputString(commands);
             String [] commandParameters = commands.split(" ");
 
             // if commandParameters length is 1, then make sure that it is a string
@@ -55,5 +62,10 @@ public class Main {
 
 
         scanner.close();
+    }
+
+    public static String cleanInputString(String userInput){
+        userInput = userInput.trim();
+        return userInput;
     }
 }
