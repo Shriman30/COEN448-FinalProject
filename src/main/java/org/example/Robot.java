@@ -84,6 +84,10 @@ public class Robot {
         return false;
     }
 
+    public void printOutOfBoundsMessage(int x_coord, int y_coord){
+        System.out.println("The Robot was about to go out of bounds and was stopped at position : ( " + x_coord + " , " + y_coord + " )");
+    }
+
     // Method is used to move the robot forward by a specified number of steps.
     public void moveRobotForward(int steps){
         int stepsActuallyMoved = 0; // Steps that were actually executed
@@ -97,6 +101,8 @@ public class Robot {
                     // went out of bounds, undoing what was done, then leaving for loop
                     y_position++;
                     stepsActuallyMoved--;
+                    int positionToPrint = y_printPosition + stepsActuallyMoved; // printing y_printPosition since it will be this value after the break;
+                    printOutOfBoundsMessage(this.getXposition(), positionToPrint);
                     break;
                 }
             }
@@ -112,6 +118,8 @@ public class Robot {
                 if(isOutOfBounds(x_position, y_position, this.floor.getSize())){
                     y_position--;
                     stepsActuallyMoved--;
+                    int positionToPrint = y_printPosition - stepsActuallyMoved; // printing y_printPosition since it will be this value after the break;
+                    printOutOfBoundsMessage(this.getXposition(), positionToPrint);
                     break;
                 }
             }
@@ -126,6 +134,7 @@ public class Robot {
                 if(isOutOfBounds(x_position,y_position,this.floor.getSize())){
                     x_position--;
                     stepsActuallyMoved--;
+                    printOutOfBoundsMessage(this.getXposition(), this.getYposition());
                     break;
                 }
             }
@@ -138,6 +147,7 @@ public class Robot {
                 if(isOutOfBounds(x_position,y_position,this.floor.getSize())){
                     x_position++;
                     stepsActuallyMoved--;
+                    printOutOfBoundsMessage(this.getXposition(), this.getYposition());
                     break;
                 }
             }
