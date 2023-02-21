@@ -2,3 +2,6 @@ target/test-classes/org/example/RobotTest.class
 
 *.class 
 **/*.class
+
+# Maven target folder
+/target/
