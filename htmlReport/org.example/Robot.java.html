@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Robot.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MainTest Coverage Results, FloorTest Coverage Results, RobotTest Coverage Results</a> &gt; <a href="index.source.html" class="el_package">org.example</a> &gt; <span class="el_source">Robot.java</span></div><h1>Robot.java</h1><pre class="source lang-java linenums">package org.example;
+
+import java.util.Scanner;
+
+public class Robot {
+    // private char [][] floor ;
+    // private int rows, cols = 0;
+    private Floor floor;
+<span class="fc" id="L9">    private Boolean isPenDown = false;</span>
+    private String isPenFacing;
+<span class="fc" id="L11">    private int x_position, y_position, y_printPosition =0;    // x and y position of the robot</span>
+    private String isFacing;     // Orientation of the robot (N,E,W,S)
+
+    //Constructor: Initialize the robot with the grid and the direction, and position [x,y] = [0,0]
+<span class="fc" id="L15">    public Robot(Floor fl){</span>
+<span class="fc" id="L16">        x_position =0;</span>
+<span class="fc" id="L17">        y_position =0;</span>
+<span class="fc" id="L18">        this.floor = fl;</span>
+        // Sets floor to proper size and all 0
+<span class="fc" id="L20">        this.floor.initializeFloor();</span>
+<span class="fc" id="L21">        initializeEnvironment(floor.getSize());</span>
+<span class="fc" id="L22">    }</span>
+
+    public String getIsPenFacing(){
+<span class="nc" id="L25">        return isPenFacing;</span>
+    }
+    public String getIsFacing(){
+<span class="nc" id="L28">        return isFacing;</span>
+    }
+    // Method used to validate whether an input parameter is numeric (and positive) or alphabetic
+    public boolean isInputParameterNumeric(String val){
+<span class="pc bpc" id="L32" title="1 of 2 branches missed.">        if(val == null) return false;</span>
+        try{
+<span class="nc" id="L34">            int i = Integer.parseInt(val);</span>
+<span class="nc bnc" id="L35" title="All 2 branches missed.">            if (i &lt; 0){</span>
+<span class="nc" id="L36">                return false;</span>
+            }
+<span class="nc" id="L38">            return true;</span>
+<span class="fc" id="L39">        }catch(NumberFormatException number){</span>
+<span class="fc" id="L40">            return false;</span>
+        }
+    }
+
+    // Method used to initialize the floor according to the given requirements: called in the constructor
+    public void initializeEnvironment(int size){
+<span class="fc" id="L46">        this.isPenFacing = &quot;Up&quot;;</span>
+<span class="fc" id="L47">        this.isFacing = &quot;NORTH&quot;;</span>
+
+<span class="fc" id="L49">        y_position = size-1;</span>
+<span class="fc" id="L50">        y_printPosition = 0;</span>
+<span class="fc" id="L51">    }</span>
+
+    // SETTERS
+    public void setIsFacing(String isFacing){
+<span class="nc" id="L55">        this.isFacing = isFacing;</span>
+<span class="nc" id="L56">    }</span>
+    private void setIsPenFacing(String isPenFacing){
+<span class="nc" id="L58">        this.isPenFacing = isPenFacing;</span>
+<span class="nc" id="L59">    }</span>
+
+    // This method is used to set the direction the robot is facing, i.e., turn the robot (N,E,S,W)
+    public void setFacingDirection(String turnCommand){
+        // check what the command is and then compare with the current position
+<span class="pc bpc" id="L64" title="1 of 2 branches missed.">        if(isFacing.equals(&quot;NORTH&quot;)) {</span>
+<span class="pc bpc" id="L65" title="2 of 4 branches missed.">            if (turnCommand.equals(&quot;L&quot;) || turnCommand.equals(&quot;l&quot;)) {setIsFacing(&quot;WEST&quot;);}</span>
+<span class="pc bpc" id="L66" title="2 of 4 branches missed.">            else if( turnCommand.equals(&quot;R&quot;)|| turnCommand.equals(&quot;r&quot;)){setIsFacing(&quot;EAST&quot;);}</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">        } else if(isFacing.equals(&quot;EAST&quot;)){</span>
+<span class="nc bnc" id="L68" title="All 4 branches missed.">            if (turnCommand.equals(&quot;L&quot;) || turnCommand.equals(&quot;l&quot;)) {setIsFacing (&quot;NORTH&quot;);}</span>
+<span class="nc bnc" id="L69" title="All 4 branches missed.">            else if( turnCommand.equals(&quot;R&quot;)|| turnCommand.equals(&quot;r&quot;)){setIsFacing(&quot;SOUTH&quot;);}</span>
+<span class="nc bnc" id="L70" title="All 2 branches missed.">        }else if(isFacing.equals(&quot;SOUTH&quot;)){</span>
+<span class="nc bnc" id="L71" title="All 4 branches missed.">            if (turnCommand.equals(&quot;L&quot;) || turnCommand.equals(&quot;l&quot;)) {setIsFacing(&quot;EAST&quot;);}</span>
+<span class="nc bnc" id="L72" title="All 4 branches missed.">            else if( turnCommand.equals(&quot;R&quot;)|| turnCommand.equals(&quot;r&quot;)){setIsFacing(&quot;WEST&quot;);}</span>
+<span class="nc bnc" id="L73" title="All 2 branches missed.">        } else if (isFacing.equals(&quot;WEST&quot;)){</span>
+<span class="nc bnc" id="L74" title="All 4 branches missed.">            if (turnCommand.equals(&quot;L&quot;)|| turnCommand.equals(&quot;l&quot;)) {setIsFacing(&quot;SOUTH&quot;);}</span>
+<span class="nc bnc" id="L75" title="All 4 branches missed.">            else if( turnCommand.equals(&quot;R&quot;)|| turnCommand.equals(&quot;r&quot;)){setIsFacing (&quot;NORTH&quot;);}</span>
+        }
+<span class="fc" id="L77">    }</span>
+
+    // Check function to see if robot is out of bounds
+    public boolean isOutOfBounds(int x,int y,int table_size){
+<span class="nc bnc" id="L81" title="All 8 branches missed.">        if(x &lt; 0 || y &lt; 0 || x &gt; table_size - 1 || y &gt; table_size -1){</span>
+<span class="nc" id="L82">            return true;</span>
+        }
+<span class="nc" id="L84">        return false;</span>
+    }
+
+    public void printOutOfBoundsMessage(int x_coord, int y_coord){
+<span class="nc" id="L88">        System.out.println(&quot;The Robot was about to go out of bounds and was stopped at position : ( &quot; + x_coord + &quot; , &quot; + y_coord + &quot; )&quot;);</span>
+<span class="nc" id="L89">    }</span>
+
+    // Method is used to move the robot forward by a specified number of steps.
+    public void moveRobotForward(int steps){
+<span class="nc" id="L93">        int stepsActuallyMoved = 0; // Steps that were actually executed</span>
+
+<span class="nc bnc" id="L95" title="All 2 branches missed.">        if(isFacing.equals(&quot;NORTH&quot;)) {</span>
+<span class="nc bnc" id="L96" title="All 2 branches missed.">            for (int i=0;i&lt;steps;i++){</span>
+<span class="nc" id="L97">                drawOnFloor(x_position,y_position);</span>
+<span class="nc" id="L98">                y_position--;</span>
+<span class="nc" id="L99">                stepsActuallyMoved++;</span>
+<span class="nc bnc" id="L100" title="All 2 branches missed.">                if(isOutOfBounds(x_position,y_position,this.floor.getSize())){</span>
+                    // went out of bounds, undoing what was done, then leaving for loop
+<span class="nc" id="L102">                    y_position++;</span>
+<span class="nc" id="L103">                    stepsActuallyMoved--;</span>
+<span class="nc" id="L104">                    int positionToPrint = y_printPosition + stepsActuallyMoved; // printing y_printPosition since it will be this value after the break;</span>
+<span class="nc" id="L105">                    printOutOfBoundsMessage(this.getXposition(), positionToPrint);</span>
+<span class="nc" id="L106">                    break;</span>
+                }
+            }
+<span class="nc" id="L109">            y_printPosition += stepsActuallyMoved;</span>
+<span class="nc" id="L110">            drawOnFloor(x_position,y_position);</span>
+        }
+<span class="nc bnc" id="L112" title="All 2 branches missed.">        if(isFacing.equals(&quot;SOUTH&quot;)) {</span>
+//            this.floor.drawOnFloor(x_position, y_position, 'v');
+<span class="nc bnc" id="L114" title="All 2 branches missed.">            for (int i=0;i&lt;steps;i++){</span>
+<span class="nc" id="L115">                drawOnFloor(x_position,y_position);</span>
+<span class="nc" id="L116">                y_position++;</span>
+<span class="nc" id="L117">                stepsActuallyMoved++;</span>
+<span class="nc bnc" id="L118" title="All 2 branches missed.">                if(isOutOfBounds(x_position, y_position, this.floor.getSize())){</span>
+<span class="nc" id="L119">                    y_position--;</span>
+<span class="nc" id="L120">                    stepsActuallyMoved--;</span>
+<span class="nc" id="L121">                    int positionToPrint = y_printPosition - stepsActuallyMoved; // printing y_printPosition since it will be this value after the break;</span>
+<span class="nc" id="L122">                    printOutOfBoundsMessage(this.getXposition(), positionToPrint);</span>
+<span class="nc" id="L123">                    break;</span>
+                }
+            }
+<span class="nc" id="L126">            y_printPosition -= stepsActuallyMoved;</span>
+<span class="nc" id="L127">            drawOnFloor(x_position,y_position);</span>
+        }
+<span class="nc bnc" id="L129" title="All 2 branches missed.">        if(isFacing.equals(&quot;EAST&quot;)) {</span>
+<span class="nc bnc" id="L130" title="All 2 branches missed.">            for (int i=0;i&lt;steps;i++){</span>
+<span class="nc" id="L131">                drawOnFloor(x_position,y_position);</span>
+<span class="nc" id="L132">                x_position++;</span>
+<span class="nc" id="L133">                stepsActuallyMoved++;</span>
+<span class="nc bnc" id="L134" title="All 2 branches missed.">                if(isOutOfBounds(x_position,y_position,this.floor.getSize())){</span>
+<span class="nc" id="L135">                    x_position--;</span>
+<span class="nc" id="L136">                    stepsActuallyMoved--;</span>
+<span class="nc" id="L137">                    printOutOfBoundsMessage(this.getXposition(), this.getYposition());</span>
+<span class="nc" id="L138">                    break;</span>
+                }
+            }
+<span class="nc" id="L141">            drawOnFloor(x_position,y_position);</span>
+        }
+<span class="nc bnc" id="L143" title="All 2 branches missed.">        if(isFacing.equals(&quot;WEST&quot;)) {</span>
+<span class="nc bnc" id="L144" title="All 2 branches missed.">            for (int i=0;i&lt;steps;i++){</span>
+<span class="nc" id="L145">                drawOnFloor(x_position,y_position);</span>
+<span class="nc" id="L146">                x_position --;</span>
+<span class="nc bnc" id="L147" title="All 2 branches missed.">                if(isOutOfBounds(x_position,y_position,this.floor.getSize())){</span>
+<span class="nc" id="L148">                    x_position++;</span>
+<span class="nc" id="L149">                    stepsActuallyMoved--;</span>
+<span class="nc" id="L150">                    printOutOfBoundsMessage(this.getXposition(), this.getYposition());</span>
+<span class="nc" id="L151">                    break;</span>
+                }
+            }
+<span class="nc" id="L154">            drawOnFloor(x_position,y_position);</span>
+        }
+<span class="nc" id="L156">    }</span>
+
+
+    // This method is used enable or disable the robot from drawing
+    public void setPen (String command) {
+<span class="pc bpc" id="L161" title="2 of 4 branches missed.">        if(command.equals(&quot;U&quot;) || command.equals(&quot;u&quot;)){</span>
+<span class="nc" id="L162">            setIsPenFacing(&quot;Up&quot;);</span>
+<span class="pc bpc" id="L163" title="2 of 4 branches missed.">        } else if(command.equals(&quot;D&quot;) ||command.equals(&quot;d&quot;)) {</span>
+<span class="nc" id="L164">            setIsPenFacing(&quot;Down&quot;);;</span>
+        }
+<span class="fc" id="L166">    }</span>
+
+    // Method used to draw at the current position if the pen is down
+    public void drawOnFloor(int x_position, int y_position){
+<span class="nc bnc" id="L170" title="All 2 branches missed.">        if(isPenFacing.equals(&quot;Down&quot;)){</span>
+<span class="nc" id="L171">            this.floor.drawOnFloor(x_position, y_position, '1');</span>
+        }
+<span class="nc" id="L173">    }</span>
+
+    // This method prints the current position of the pen, whether it is facing up/down and the direction (NEWS)
+    public String printRobotStatus(){
+<span class="nc" id="L177">        return (&quot;Position: &quot; + x_position + &quot;, &quot; + y_printPosition + &quot; - &quot; +</span>
+<span class="nc" id="L178">                &quot;Pen: &quot;+isPenFacing.toLowerCase()+ &quot; - &quot; +</span>
+<span class="nc" id="L179">                &quot;Facing: &quot;+ isFacing.toLowerCase());</span>
+    }
+
+    // // Method used to show the user the floor traversed by the robot
+    public void printFloor(){
+<span class="nc" id="L184">        this.floor.printFloor();</span>
+<span class="nc" id="L185">    }</span>
+
+    // returns the x position of the robot
+    public int getXposition(){
+<span class="nc" id="L189">        return this.x_position;</span>
+    }
+
+    // returns the y position of the robot
+    public int getYposition(){
+<span class="nc" id="L194">        return this.y_printPosition;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

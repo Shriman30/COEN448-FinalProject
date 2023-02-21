@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Floor.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MainTest Coverage Results, FloorTest Coverage Results, RobotTest Coverage Results</a> &gt; <a href="index.source.html" class="el_package">org.example</a> &gt; <span class="el_source">Floor.java</span></div><h1>Floor.java</h1><pre class="source lang-java linenums">package org.example;
+
+public class Floor {
+    private char [][] floor;
+<span class="fc" id="L5">    private int size, rows, cols = 0;</span>
+
+<span class="fc" id="L7">    public Floor(){</span>
+        // this.rows = rows;
+        // this.cols = cols;
+<span class="fc" id="L10">    }</span>
+
+    public void drawOnFloor(int x_position, int y_position, char val){
+<span class="nc" id="L13">        this.floor[y_position][x_position] = val;</span>
+<span class="nc" id="L14">    }</span>
+
+    // Method used to initialize the floor according to the given requirements: called in the constructor
+    public void initializeFloor(){
+<span class="fc" id="L18">        this.rows = this.size;</span>
+<span class="fc" id="L19">        this.cols = this.size;</span>
+<span class="fc" id="L20">        this.floor = new char[rows][cols];</span>
+
+<span class="fc bfc" id="L22" title="All 2 branches covered.">        for(int i=0;i&lt;this.rows; i++){</span>
+<span class="fc bfc" id="L23" title="All 2 branches covered.">            for (int j=0;j&lt;this.cols; j++){</span>
+<span class="fc" id="L24">                this.floor[i][j] = '0';</span>
+            }
+        }
+<span class="fc" id="L27">    }</span>
+        // Method used to show the user the floor traversed by the robot
+        public void printFloor(){
+            // printing of the floor
+<span class="nc bnc" id="L31" title="All 2 branches missed.">            for (int i=0;i&lt; this.rows;i++){</span>
+<span class="nc" id="L32">                System.out.print(&quot;|&quot;);</span>
+<span class="nc bnc" id="L33" title="All 2 branches missed.">                for (int j=0; j&lt; this.cols;j++){</span>
+                    // replacing all ones with *
+<span class="nc bnc" id="L35" title="All 2 branches missed.">                    if(this.floor[i][j] == '1'){this.floor[i][j] = '*';}</span>
+<span class="nc bnc" id="L36" title="All 2 branches missed.">                    if(this.floor[i][j] =='0'){this.floor[i][j] = ' ';}</span>
+                    // printing the floor
+<span class="nc" id="L38">                    System.out.print( this.floor[i][j]+&quot;|&quot;);</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">                    if(j == cols-1) System.out.println(&quot; &quot;);</span>
+                }
+            }
+<span class="nc" id="L42">        }</span>
+
+        public boolean setFloor(String commands) {
+            // Initial input commands to set floor
+<span class="fc" id="L46">            String[] commandParameters = commands.split(&quot; &quot;);</span>
+<span class="pc bpc" id="L47" title="1 of 2 branches missed.">            if (commandParameters.length == 2) {</span>
+<span class="pc bpc" id="L48" title="3 of 4 branches missed.">                if (commandParameters[0].equals(&quot;I&quot;) || commandParameters[0].equals(&quot;i&quot;)) {</span>
+<span class="pc bpc" id="L49" title="1 of 2 branches missed.">                    if (isInputParameterNumeric(commandParameters[1])) {</span>
+<span class="fc" id="L50">                        this.setSize(Integer.parseInt(commandParameters[1]));</span>
+<span class="fc" id="L51">                        return true;</span>
+                    }
+                }
+            }
+<span class="nc" id="L55">            return false;</span>
+        }
+
+        // Method used to validate whether an input parameter is numeric or alphabetic
+        public boolean isInputParameterNumeric(String val) {
+<span class="pc bpc" id="L60" title="1 of 2 branches missed.">            if (val == null)</span>
+<span class="nc" id="L61">                return false;</span>
+            try {
+<span class="fc" id="L63">                int i = Integer.parseInt(val);</span>
+<span class="fc" id="L64">                return true;</span>
+<span class="nc" id="L65">            } catch (NumberFormatException number) {</span>
+<span class="nc" id="L66">                return false;</span>
+            }
+        }
+
+        public int getSize(){
+<span class="fc" id="L71">            return this.size;</span>
+        }
+
+        public void setSize(int size){
+<span class="fc" id="L75">            this.size = size;</span>
+<span class="fc" id="L76">        }</span>
+
+        public int getColumns(){
+<span class="nc" id="L79">            return this.cols;</span>
+        }
+
+        public int getRows(){
+<span class="nc" id="L83">            return this.rows;</span>
+        }
+
+<span class="nc" id="L86">        public char getFloorValue(int x, int y) {return this.floor[x][y];}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,0 +1,300 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Robot</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.example</a>
+</div>
+
+<h1>Coverage Summary for Class: Robot (org.example)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Robot</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (17/17)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (99/99)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package org.example;
+&nbsp;
+&nbsp;import java.util.Scanner;
+&nbsp;
+&nbsp;public class Robot {
+&nbsp;    // private char [][] floor ;
+&nbsp;    // private int rows, cols = 0;
+&nbsp;    private Floor floor;
+<b class="fc">&nbsp;    private Boolean isPenDown = false;</b>
+&nbsp;    private String isPenFacing;
+<b class="fc">&nbsp;    private int x_position, y_position, y_printPosition =0;    // x and y position of the robot</b>
+&nbsp;    private String isFacing;     // Orientation of the robot (N,E,W,S)
+&nbsp;
+&nbsp;    //Constructor: Initialize the robot with the grid and the direction, and position [x,y] = [0,0]
+<b class="fc">&nbsp;    public Robot(Floor fl){</b>
+<b class="fc">&nbsp;        x_position =0;</b>
+<b class="fc">&nbsp;        y_position =0;</b>
+<b class="fc">&nbsp;        this.floor = fl;</b>
+&nbsp;        // Sets floor to proper size and all 0
+<b class="fc">&nbsp;        this.floor.initializeFloor();</b>
+<b class="fc">&nbsp;        initializeEnvironment(floor.getSize());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getIsPenFacing(){
+<b class="fc">&nbsp;        return isPenFacing;</b>
+&nbsp;    }
+&nbsp;    public String getIsFacing(){
+<b class="fc">&nbsp;        return isFacing;</b>
+&nbsp;    }
+&nbsp;    // Method used to validate whether an input parameter is numeric (and positive) or alphabetic
+&nbsp;    public boolean isInputParameterNumeric(String val){
+<b class="fc">&nbsp;        if(val == null) return false;</b>
+&nbsp;        try{
+<b class="fc">&nbsp;            int i = Integer.parseInt(val);</b>
+<b class="fc">&nbsp;            if (i &lt; 0){</b>
+<b class="fc">&nbsp;                return false;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            return true;</b>
+<b class="fc">&nbsp;        }catch(NumberFormatException number){</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    // Method used to initialize the floor according to the given requirements: called in the constructor
+&nbsp;    public void initializeEnvironment(int size){
+<b class="fc">&nbsp;        this.isPenFacing = &quot;Up&quot;;</b>
+<b class="fc">&nbsp;        this.isFacing = &quot;NORTH&quot;;</b>
+&nbsp;
+<b class="fc">&nbsp;        y_position = size-1;</b>
+<b class="fc">&nbsp;        y_printPosition = 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // SETTERS
+&nbsp;    public void setIsFacing(String isFacing){
+<b class="fc">&nbsp;        this.isFacing = isFacing;</b>
+&nbsp;    }
+&nbsp;    private void setIsPenFacing(String isPenFacing){
+<b class="fc">&nbsp;        this.isPenFacing = isPenFacing;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // This method is used to set the direction the robot is facing, i.e., turn the robot (N,E,S,W)
+&nbsp;    public void setFacingDirection(String turnCommand){
+&nbsp;        // check what the command is and then compare with the current position
+<b class="fc">&nbsp;        if(isFacing.equals(&quot;NORTH&quot;)) {</b>
+<b class="fc">&nbsp;            if (turnCommand.equals(&quot;L&quot;) || turnCommand.equals(&quot;l&quot;)) {setIsFacing(&quot;WEST&quot;);}</b>
+<b class="fc">&nbsp;            else if( turnCommand.equals(&quot;R&quot;)|| turnCommand.equals(&quot;r&quot;)){setIsFacing(&quot;EAST&quot;);}</b>
+<b class="fc">&nbsp;        } else if(isFacing.equals(&quot;EAST&quot;)){</b>
+<b class="fc">&nbsp;            if (turnCommand.equals(&quot;L&quot;) || turnCommand.equals(&quot;l&quot;)) {setIsFacing (&quot;NORTH&quot;);}</b>
+<b class="fc">&nbsp;            else if( turnCommand.equals(&quot;R&quot;)|| turnCommand.equals(&quot;r&quot;)){setIsFacing(&quot;SOUTH&quot;);}</b>
+<b class="fc">&nbsp;        }else if(isFacing.equals(&quot;SOUTH&quot;)){</b>
+<b class="fc">&nbsp;            if (turnCommand.equals(&quot;L&quot;) || turnCommand.equals(&quot;l&quot;)) {setIsFacing(&quot;EAST&quot;);}</b>
+<b class="fc">&nbsp;            else if( turnCommand.equals(&quot;R&quot;)|| turnCommand.equals(&quot;r&quot;)){setIsFacing(&quot;WEST&quot;);}</b>
+<b class="fc">&nbsp;        } else if (isFacing.equals(&quot;WEST&quot;)){</b>
+<b class="fc">&nbsp;            if (turnCommand.equals(&quot;L&quot;)|| turnCommand.equals(&quot;l&quot;)) {setIsFacing(&quot;SOUTH&quot;);}</b>
+<b class="fc">&nbsp;            else if( turnCommand.equals(&quot;R&quot;)|| turnCommand.equals(&quot;r&quot;)){setIsFacing (&quot;NORTH&quot;);}</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    // Check function to see if robot is out of bounds
+&nbsp;    public boolean isOutOfBounds(int x,int y,int table_size){
+<b class="fc">&nbsp;        if(x &lt; 0 || y &lt; 0 || x &gt; table_size - 1 || y &gt; table_size -1){</b>
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void printOutOfBoundsMessage(int x_coord, int y_coord){
+<b class="fc">&nbsp;        System.out.println(&quot;The Robot was about to go out of bounds and was stopped at position : ( &quot; + x_coord + &quot; , &quot; + y_coord + &quot; )&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // Method is used to move the robot forward by a specified number of steps.
+&nbsp;    public void moveRobotForward(int steps){
+<b class="fc">&nbsp;        int stepsActuallyMoved = 0; // Steps that were actually executed</b>
+&nbsp;
+<b class="fc">&nbsp;        if(isFacing.equals(&quot;NORTH&quot;)) {</b>
+<b class="fc">&nbsp;            for (int i=0;i&lt;steps;i++){</b>
+<b class="fc">&nbsp;                drawOnFloor(x_position,y_position);</b>
+<b class="fc">&nbsp;                y_position--;</b>
+<b class="fc">&nbsp;                stepsActuallyMoved++;</b>
+<b class="fc">&nbsp;                if(isOutOfBounds(x_position,y_position,this.floor.getSize())){</b>
+&nbsp;                    // went out of bounds, undoing what was done, then leaving for loop
+<b class="fc">&nbsp;                    y_position++;</b>
+<b class="fc">&nbsp;                    stepsActuallyMoved--;</b>
+<b class="fc">&nbsp;                    int positionToPrint = y_printPosition + stepsActuallyMoved; // printing y_printPosition since it will be this value after the break;</b>
+<b class="fc">&nbsp;                    printOutOfBoundsMessage(this.getXposition(), positionToPrint);</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            y_printPosition += stepsActuallyMoved;</b>
+<b class="fc">&nbsp;            drawOnFloor(x_position,y_position);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if(isFacing.equals(&quot;SOUTH&quot;)) {</b>
+&nbsp;//            this.floor.drawOnFloor(x_position, y_position, &#39;v&#39;);
+<b class="fc">&nbsp;            for (int i=0;i&lt;steps;i++){</b>
+<b class="fc">&nbsp;                drawOnFloor(x_position,y_position);</b>
+<b class="fc">&nbsp;                y_position++;</b>
+<b class="fc">&nbsp;                stepsActuallyMoved++;</b>
+<b class="fc">&nbsp;                if(isOutOfBounds(x_position, y_position, this.floor.getSize())){</b>
+<b class="fc">&nbsp;                    y_position--;</b>
+<b class="fc">&nbsp;                    stepsActuallyMoved--;</b>
+<b class="fc">&nbsp;                    int positionToPrint = y_printPosition - stepsActuallyMoved; // printing y_printPosition since it will be this value after the break;</b>
+<b class="fc">&nbsp;                    printOutOfBoundsMessage(this.getXposition(), positionToPrint);</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            y_printPosition -= stepsActuallyMoved;</b>
+<b class="fc">&nbsp;            drawOnFloor(x_position,y_position);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if(isFacing.equals(&quot;EAST&quot;)) {</b>
+<b class="fc">&nbsp;            for (int i=0;i&lt;steps;i++){</b>
+<b class="fc">&nbsp;                drawOnFloor(x_position,y_position);</b>
+<b class="fc">&nbsp;                x_position++;</b>
+<b class="fc">&nbsp;                stepsActuallyMoved++;</b>
+<b class="fc">&nbsp;                if(isOutOfBounds(x_position,y_position,this.floor.getSize())){</b>
+<b class="fc">&nbsp;                    x_position--;</b>
+<b class="fc">&nbsp;                    stepsActuallyMoved--;</b>
+<b class="fc">&nbsp;                    printOutOfBoundsMessage(this.getXposition(), this.getYposition());</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            drawOnFloor(x_position,y_position);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if(isFacing.equals(&quot;WEST&quot;)) {</b>
+<b class="fc">&nbsp;            for (int i=0;i&lt;steps;i++){</b>
+<b class="fc">&nbsp;                drawOnFloor(x_position,y_position);</b>
+<b class="fc">&nbsp;                x_position --;</b>
+<b class="fc">&nbsp;                if(isOutOfBounds(x_position,y_position,this.floor.getSize())){</b>
+<b class="fc">&nbsp;                    x_position++;</b>
+<b class="fc">&nbsp;                    stepsActuallyMoved--;</b>
+<b class="fc">&nbsp;                    printOutOfBoundsMessage(this.getXposition(), this.getYposition());</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            drawOnFloor(x_position,y_position);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    // This method is used enable or disable the robot from drawing
+&nbsp;    public void setPen (String command) {
+<b class="fc">&nbsp;        if(command.equals(&quot;U&quot;) || command.equals(&quot;u&quot;)){</b>
+<b class="fc">&nbsp;            setIsPenFacing(&quot;Up&quot;);</b>
+<b class="fc">&nbsp;        } else if(command.equals(&quot;D&quot;) ||command.equals(&quot;d&quot;)) {</b>
+<b class="fc">&nbsp;            setIsPenFacing(&quot;Down&quot;);;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    // Method used to draw at the current position if the pen is down
+&nbsp;    public void drawOnFloor(int x_position, int y_position){
+<b class="fc">&nbsp;        if(isPenFacing.equals(&quot;Down&quot;)){</b>
+<b class="fc">&nbsp;            this.floor.drawOnFloor(x_position, y_position, &#39;1&#39;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    // This method prints the current position of the pen, whether it is facing up/down and the direction (NEWS)
+&nbsp;    public String printRobotStatus(){
+<b class="fc">&nbsp;        return (&quot;Position: &quot; + x_position + &quot;, &quot; + y_printPosition + &quot; - &quot; +</b>
+<b class="fc">&nbsp;                &quot;Pen: &quot;+isPenFacing.toLowerCase()+ &quot; - &quot; +</b>
+<b class="fc">&nbsp;                &quot;Facing: &quot;+ isFacing.toLowerCase());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // // Method used to show the user the floor traversed by the robot
+&nbsp;    public void printFloor(){
+<b class="fc">&nbsp;        this.floor.printFloor();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // returns the x position of the robot
+&nbsp;    public int getXposition(){
+<b class="fc">&nbsp;        return this.x_position;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // returns the y position of the robot
+&nbsp;    public int getYposition(){
+<b class="fc">&nbsp;        return this.y_printPosition;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-02-21 09:25</div>
+</div>
+</body>
+</html>

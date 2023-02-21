@@ -1,0 +1,174 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Main</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.example</a>
+</div>
+
+<h1>Coverage Summary for Class: Main (org.example)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Main</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    61.1%
+  </span>
+  <span class="absValue">
+    (22/36)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package org.example;
+&nbsp;import java.util.Scanner;
+<b class="nc">&nbsp;public class Main {</b>
+&nbsp;
+&nbsp;    public static void main(String[] args) {
+&nbsp;        // Getting user input for initial floor size
+<b class="fc">&nbsp;        Scanner scanner = new Scanner (System.in);</b>
+<b class="fc">&nbsp;        System.out.println(&quot;Please Enter Command to initialize floor:&quot;);</b>
+<b class="fc">&nbsp;        String commands = scanner.nextLine();</b>
+<b class="fc">&nbsp;        if(commands.length() &lt; 3){</b>
+<b class="nc">&nbsp;            System.out.println(&quot;The command that you entered is not a valid initialization command. Please restart and try again!&quot;);</b>
+<b class="nc">&nbsp;            scanner.close();</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="fc">&nbsp;        commands = cleanInputString(commands);</b>
+<b class="fc">&nbsp;        Floor floor = new Floor();</b>
+&nbsp;        // Setting floor size
+<b class="fc">&nbsp;        floor.setFloor(commands);</b>
+&nbsp;        // Passing floor to this robot to use
+<b class="fc">&nbsp;        Robot robot = new Robot(floor);</b>
+&nbsp;        while(true){
+<b class="fc">&nbsp;            System.out.println(&quot;Please Enter Command:&quot;);</b>
+<b class="fc">&nbsp;            commands = scanner.nextLine();</b>
+<b class="fc">&nbsp;            commands = cleanInputString(commands);</b>
+<b class="fc">&nbsp;            String [] commandParameters = commands.split(&quot; &quot;);</b>
+&nbsp;
+&nbsp;            // if commandParameters length is 1, then make sure that it is a string
+<b class="fc">&nbsp;            if(commandParameters.length == 1){</b>
+<b class="fc">&nbsp;                if(!robot.isInputParameterNumeric(commandParameters[0])){</b>
+&nbsp;                    // if the command is up or down set the pen position accordingly
+<b class="fc">&nbsp;                        robot.setPen(commandParameters[0]);</b>
+&nbsp;                    // if the command is left or right, then rotate the robot accordingly
+<b class="fc">&nbsp;                        robot.setFacingDirection(commandParameters[0]);</b>
+&nbsp;                    // if the command is  C, then print the current status of the robot and its pen
+<b class="fc">&nbsp;                    if(commandParameters[0].equals(&quot;C&quot;) || commandParameters[0].equals(&quot;c&quot;)){</b>
+<b class="nc">&nbsp;                        System.out.println(robot.printRobotStatus());</b>
+&nbsp;                    }
+&nbsp;                    // if the command is P, then display the floor
+<b class="fc">&nbsp;                    else if(commandParameters[0].equals(&quot;P&quot;) || commandParameters[0].equals(&quot;p&quot;)){</b>
+<b class="nc">&nbsp;                        robot.printFloor();</b>
+&nbsp;                    }
+&nbsp;                    // if the command is  Q, then exit the program
+<b class="fc">&nbsp;                    else if(commandParameters[0].equals(&quot;Q&quot;) || commandParameters[0].equals(&quot;q&quot;)){</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;            // if the commandParameters length = 2
+<b class="nc">&nbsp;            else if(commandParameters.length == 2){</b>
+&nbsp;                // if the first parameter is a letter and the second parameter is a number
+<b class="nc">&nbsp;                if(!robot.isInputParameterNumeric(commandParameters[0]) &amp;&amp; robot.isInputParameterNumeric(commandParameters[1])){</b>
+&nbsp;                    // if the first parameter is M, then move forward in the specified direction
+<b class="nc">&nbsp;                    if(commandParameters[0].equals(&quot;M&quot;)||commandParameters[0].equals(&quot;m&quot;)){</b>
+<b class="nc">&nbsp;                        robot.moveRobotForward(Integer.parseInt(commandParameters[1]));</b>
+<b class="nc">&nbsp;                    } else System.out.println(&quot;Invalid input, please try again.&quot;);</b>
+&nbsp;                }
+<b class="nc">&nbsp;                else System.out.println(&quot;Invalid input, please try again.&quot;);</b>
+&nbsp;            }
+&nbsp;            // if the commandParameters length &lt;1 or &gt;2
+<b class="nc">&nbsp;            else System.out.println(&quot;Invalid command, please try again.&quot;);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;        scanner.close();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String cleanInputString(String userInput){
+<b class="fc">&nbsp;        userInput = userInput.trim();</b>
+<b class="fc">&nbsp;        return userInput;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-02-21 09:25</div>
+</div>
+</body>
+</html>
