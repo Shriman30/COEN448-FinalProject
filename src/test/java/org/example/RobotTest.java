@@ -5,12 +5,59 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.List;
 
 import org.junit.Test;
 
 class RobotTest {
+
+    @org.junit.jupiter.api.Test
+    public void addHistoryTest(){
+        Floor floor = new Floor();
+        floor.setSize(5);
+        Robot robo = new Robot(floor);
+        robo.addHistory("m 2");
+        robo.addHistory("d");
+        robo.addHistory("u");
+        List<String> commandHistory = robo.getHistoryList();
+        assertEquals(commandHistory.get(0),"m 2");
+        assertEquals(commandHistory.get(1),"d");
+        assertEquals(commandHistory.get(2),"u");
+        System.out.println("");
+    }
+
+    @org.junit.jupiter.api.Test
+    void printHistoryFromMainTest() {
+        Floor floor = new Floor();
+        floor.setFloor("I 3");
+        Robot robo = new Robot(floor);
+
+        // For testing System.out.println() statements
+        PrintStream originalOut = System.out;
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
+        InputStream originalIn = System.in;
+        String input = "I 3\nm 2\nu\nd\nh\nq\n";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        Main.main(new String[] {});
+
+        // Removing white space and line breaks due to limitations of comparing strings
+        String out = outContent.toString().replaceAll("\\s", "");
+        String expected = "PleaseEnterCommandtoinitializefloor:PleaseEnterCommand:PleaseEnterCommand:PleaseEnterCommand:PleaseEnterCommand:CommandHistory:m2udhPleaseEnterCommand:";
+
+        assertEquals(expected, out);
+
+        // Setting print back to before
+        System.setOut(originalOut);
+        System.setIn(originalIn);
+    }
 
     // R6
     @org.junit.jupiter.api.Test

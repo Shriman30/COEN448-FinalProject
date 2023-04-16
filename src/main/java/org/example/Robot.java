@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Robot {
@@ -10,6 +12,7 @@ public class Robot {
     private String isPenFacing;
     private int x_position, y_position, y_printPosition =0;    // x and y position of the robot
     private String isFacing;     // Orientation of the robot (N,E,W,S)
+    private List<String> commandHistory = new ArrayList<String>();
 
     //Constructor: Initialize the robot with the grid and the direction, and position [x,y] = [0,0]
     public Robot(Floor fl){
@@ -192,6 +195,21 @@ public class Robot {
     // returns the y position of the robot
     public int getYposition(){
         return this.y_printPosition;
+    }
+
+    public void addHistory(String commands){
+        this.commandHistory.add(commands);
+    }
+
+    public List<String> getHistoryList(){
+        return this.commandHistory;
+    }
+
+    public void printHistory(){
+        System.out.println("Command History:");
+        for (int i =0;i<this.commandHistory.size();i++){
+            System.out.println(this.commandHistory.get(i));
+        }
     }
 
 }
