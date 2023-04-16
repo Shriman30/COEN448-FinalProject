@@ -1,4 +1,6 @@
 package org.example;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 public class Main {
 
@@ -18,11 +20,21 @@ public class Main {
         floor.setFloor(commands);
         // Passing floor to this robot to use
         Robot robot = new Robot(floor);
+        List<String> commandHistory = new ArrayList<String>();
         while(true){
             System.out.println("Please Enter Command:");
             commands = scanner.nextLine();
             commands = cleanInputString(commands);
             String [] commandParameters = commands.split(" ");
+            commandHistory.add(commands);
+            // if command is H or h, replay command history
+            if(commandParameters.length == 1 && (commandParameters[0].equals("H") || commandParameters[0].equals("h"))){
+                System.out.println("Command History:");
+                for (int i =0;i<commandHistory.size();i++){
+                    System.out.println(commandHistory.get(i));
+                }
+//                continue; // continue to the next iteration of the while loop
+            }
 
             // if commandParameters length is 1, then make sure that it is a string
             if(commandParameters.length == 1){
